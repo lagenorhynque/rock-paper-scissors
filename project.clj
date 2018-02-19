@@ -29,7 +29,12 @@
                    [day8.re-frame/test "0.1.5"]]
 
     :plugins      [[lein-figwheel "0.5.15"]
-                   [lein-doo "0.1.9"]]}}
+                   [lein-doo "0.1.9"]]
+
+    :aliases {"run-test" ^{:doc "Run CLJS tests with PhantomJS once."}
+              ["doo" "phantom" "test" "once"]
+              "watch-test" ^{:doc "Run CLJS tests with PhantomJS repeatedly."}
+              ["doo" "phantom" "test"]}}}
 
   :cljsbuild
   {:builds
