@@ -1,12 +1,14 @@
 (defproject rock-paper-scissors "0.1.0-SNAPSHOT"
-  :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/clojurescript "1.9.908"]
+  :dependencies [[org.clojure/clojure "1.9.0"]
+                 [org.clojure/clojurescript "1.9.946"]
                  [reagent "0.7.0"]
-                 [re-frame "0.10.4"]]
+                 [re-frame "0.10.5"]]
 
-  :plugins [[lein-cljsbuild "1.1.5"]]
+  :plugins [[lein-cljsbuild "1.1.7"]]
 
   :min-lein-version "2.5.3"
+
+  :jvm-opts ["--add-modules" "java.xml.bind"]
 
   :source-paths ["src/clj"]
 
@@ -19,12 +21,12 @@
 
   :profiles
   {:dev
-   {:dependencies [[binaryage/devtools "0.9.4"]
-                   [figwheel-sidecar "0.5.13"]
+   {:dependencies [[binaryage/devtools "0.9.9"]
+                   [figwheel-sidecar "0.5.15"]
                    [com.cemerick/piggieback "0.2.2"]]
 
-    :plugins      [[lein-figwheel "0.5.13"]
-                   [lein-doo "0.1.8"]]}}
+    :plugins      [[lein-figwheel "0.5.15"]
+                   [lein-doo "0.1.9"]]}}
 
   :cljsbuild
   {:builds
