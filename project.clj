@@ -39,7 +39,7 @@
   :cljsbuild
   {:builds
    [{:id           "dev"
-     :source-paths ["src/cljs"]
+     :source-paths ["src/cljs" "specs/cljs"]
      :figwheel     {:on-jsload "rock-paper-scissors.core/mount-root"
                     :open-urls ["http://localhost:3449"]}
      :compiler     {:main                 rock-paper-scissors.core
@@ -61,7 +61,7 @@
                     :pretty-print    false}}
 
     {:id           "test"
-     :source-paths ["src/cljs" "test/cljs"]
+     :source-paths ["src/cljs" "specs/cljs" "test/cljs"]
      :compiler     {:main          rock-paper-scissors.runner
                     :output-to     "resources/public/js/compiled/test.js"
                     :output-dir    "resources/public/js/compiled/test/out"
