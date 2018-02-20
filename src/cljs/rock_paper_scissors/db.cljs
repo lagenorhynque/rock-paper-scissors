@@ -1,4 +1,7 @@
-(ns rock-paper-scissors.db)
+(ns rock-paper-scissors.db
+  (:require [rock-paper-scissors.rps :as rps]))
 
 (def default-db
-  {:name "re-frame"})
+  {:you ::rps/rock
+   :enemy ::rps/rock
+   :scene ::start})
