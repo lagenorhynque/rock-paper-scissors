@@ -2,6 +2,11 @@
   (:require [re-frame.core :as re-frame]))
 
 (re-frame/reg-sub
- ::name
- (fn [db]
-   (:name db)))
+  ::scene
+  (fn [db _]
+    (:scene db)))
+
+(re-frame/reg-sub
+  ::you-enemy
+  (fn [db _]
+    (select-keys db [:you :enemy])))
