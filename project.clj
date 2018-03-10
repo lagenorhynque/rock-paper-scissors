@@ -23,7 +23,10 @@
   {:dev
    {:dependencies [[binaryage/devtools "0.9.9"]
                    [figwheel-sidecar "0.5.15"]
-                   [com.cemerick/piggieback "0.2.2"]]
+                   [com.cemerick/piggieback "0.2.2"]
+                   [org.clojure/test.check "0.9.0"]
+                   [day8.re-frame/re-frame-10x "0.3.0"]
+                   [day8.re-frame/test "0.1.5"]]
 
     :plugins      [[lein-figwheel "0.5.15"]
                    [lein-doo "0.1.9"]]}}
@@ -32,13 +35,15 @@
   {:builds
    [{:id           "dev"
      :source-paths ["src/cljs"]
-     :figwheel     {:on-jsload "rock-paper-scissors.core/mount-root"}
+     :figwheel     {:on-jsload "rock-paper-scissors.core/mount-root"
+                    :open-urls ["http://localhost:3449"]}
      :compiler     {:main                 rock-paper-scissors.core
                     :output-to            "resources/public/js/compiled/app.js"
                     :output-dir           "resources/public/js/compiled/out"
                     :asset-path           "js/compiled/out"
                     :source-map-timestamp true
-                    :preloads             [devtools.preload]
+                    :closure-defines {"re_frame.trace.trace_enabled_QMARK_" true}
+                    :preloads             [devtools.preload day8.re-frame-10x.preload]
                     :external-config      {:devtools/config {:features-to-install :all}}
                     }}
 
