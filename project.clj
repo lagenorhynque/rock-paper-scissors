@@ -8,7 +8,8 @@
 
   :min-lein-version "2.5.3"
 
-  :jvm-opts ["--add-modules" "java.xml.bind"]
+  ;; for Java 9
+  ;; :jvm-opts ["--add-modules" "java.xml.bind"]
 
   :source-paths ["src/clj"]
 

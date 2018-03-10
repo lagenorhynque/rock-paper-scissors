@@ -1,5 +1,7 @@
 # rock-paper-scissors
 
+[![CircleCI](https://circleci.com/gh/lagenorhynque/rock-paper-scissors.svg?style=svg)](https://circleci.com/gh/lagenorhynque/rock-paper-scissors)
+
 A [re-frame](https://github.com/Day8/re-frame) application designed to ... well, that part is up to you.
 
 ## Development Mode
