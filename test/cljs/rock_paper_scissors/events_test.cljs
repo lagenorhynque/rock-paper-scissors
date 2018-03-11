@@ -1,11 +1,13 @@
 (ns rock-paper-scissors.events-test
-  (:require [cljs.spec.test.alpha :as stest :include-macros true]
+  (:require [cljs.spec.alpha :as s]
+            [cljs.spec.test.alpha :as stest :include-macros true]
             [cljs.test :as t :include-macros true]
             [day8.re-frame.test :as re-frame.test :include-macros true]
             [re-frame.core :as re-frame]
+            [re-frame.db :refer [app-db]]
             [rock-paper-scissors.cofx :as cofx]
             [rock-paper-scissors.db :as db]
-            [rock-paper-scissors.db.specs]
+            [rock-paper-scissors.db.specs :as db.specs]
             [rock-paper-scissors.events :as sut]
             [rock-paper-scissors.rps :as rps]
             [rock-paper-scissors.rps.specs]
@@ -14,8 +16,18 @@
 (t/use-fixtures
   :once {:before #(stest/instrument)})
 
+(defn test-fixtures []
+  (re-frame/reg-fx
+    :db
+    (fn [value]
+      (when-not (s/valid? ::db.specs/db value)
+        (throw (ex-info "db spec check failed" (s/explain-data ::db.specs/db value))))
+      (if-not (identical? @app-db value)
+        (reset! app-db value)))))
+
 (t/deftest test-initialize-db
   (re-frame.test/run-test-sync
+   (test-fixtures)
    (re-frame/dispatch [::sut/initialize-db])
    (t/is ::db/start @(re-frame/subscribe [::subs/scene]))
    (t/is {:you ::rps/rock
@@ -24,12 +36,14 @@
 
 (t/deftest test-next-game
   (re-frame.test/run-test-sync
+   (test-fixtures)
    (re-frame/dispatch [::sut/initialize-db])
    (re-frame/dispatch [::sut/next-game])
    (t/is ::db/now-playing @(re-frame/subscribe [::subs/scene]))))
 
 (t/deftest test-select-your-hand
   (re-frame.test/run-test-sync
+   (test-fixtures)
    (re-frame/reg-cofx
      ::cofx/select-enemy-hand
      (fn [cofx _]
